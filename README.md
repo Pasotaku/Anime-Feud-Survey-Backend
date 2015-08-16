@@ -8,12 +8,10 @@ This is the backend for the Anime Themed Family Feud Survey, it is built using t
 To run the app, follow these steps.
 
 1. Install the Eve framework 
-
 	Using pip:
-
-	'''
+	```
 	pip install eve
-	'''
+  	```
 
 2. Install mongodb if you haven't already
 
@@ -22,7 +20,7 @@ To run the app, follow these steps.
 4. Configure the server in run.py to run at the right port.
 
 4. Run the server.
-
   ```
+
   python run.py
   ```
