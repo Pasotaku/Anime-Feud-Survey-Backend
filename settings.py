@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-
-"""
-
 import os
 
 # We want to seamlessy run our API both locally and on Heroku. If running on
@@ -114,11 +110,53 @@ works = {
     }
 }
 
+tos = {
+    'schema':{
+        'tos_text' : {
+            'type' : 'string',
+            'required' : True,
+        },
+        'tos_displayed': {
+            'type': 'boolean',
+            'required' : True,
+        },
+        'tos_accepted': {
+            'type': 'boolean',
+            'required' : True,
+        },
+        'display_again': {
+            'type': 'boolean',
+            'required' : True,
+        },
+    }
+}
+
+survey = {
+    'schema' : {
+        'ID': {
+            'type': 'integer',
+            'required' : True,
+        },
+        'Question' : {
+            'type' : 'string',
+            'required' : True,
+        },
+        'Type': {
+            'type' :  'string',
+            'required': True,
+        },
+        'Answered' : {
+            'type': 'boolean',
+            'required': True,
+        }
+    }
+}
+
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
-    'users/usernames/survey' : {},
-    'users/username/tos' : {},
+    'users/usernames/survey' : survey,
+    'users/username/tos' : tos,
     'anime/search/{animename}' : {},
 
 }
