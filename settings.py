@@ -111,6 +111,7 @@ works = {
 }
 
 tos = {
+ 'item_title': 'Terms Of Service',
     'schema':{
         'tos_text' : {
             'type' : 'string',
@@ -132,6 +133,7 @@ tos = {
 }
 
 survey = {
+ 'item_title': 'Survey',
     'schema' : {
         'ID': {
             'type': 'integer',
