@@ -6,7 +6,10 @@ from flask import request, redirect
 # from eve_auth_jwt import JWTAuth  # Re-enable when auth is implemented correctly
 
 import oauth
+import settings_db_init
 
+
+settings_db_init.init()  # Create settings database if it doesn't exist
 
 # Heroku support: bind to PORT if defined, otherwise default to 5000.
 if 'PORT' in os.environ:
