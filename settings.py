@@ -25,6 +25,9 @@ import os
 CACHE_CONTROL = 'max-age=20'
 CACHE_EXPIRES = 20
 
+JWT_SECRET ="JimmyKun"
+JWT_ISSUER ="Test" 
+
 tos = {
  'item_title': 'Terms Of Service',
     'schema':{
@@ -72,8 +75,8 @@ survey = {
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
-    'users/usernames/survey' : survey,
     'users/username/tos' : tos,
+    'users/usernames/survey' : survey,
     'anime/search/{animename}' : {},
 
 }
