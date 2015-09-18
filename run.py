@@ -2,11 +2,14 @@
 
 import os
 from eve import Eve
+from eve.auth import TokenAuth
 from flask import request, redirect
 # from eve_auth_jwt import JWTAuth  # Re-enable when auth is implemented correctly
 
 import oauth
 import settings_db_init
+
+import jwt
 
 
 settings_db_init.init()  # Create settings database if it doesn't exist
@@ -21,8 +24,28 @@ else:
     port = 5000
     host = '127.0.0.1'
 
+class RolesAuth(TokenAuth):
+
+    def check_auth(self, token, allowed_roles, resource, method):
+        users = app.data.driver.db['users']
+        # Add check of user credentials by decoding JWT
+        user = users.find_one({'token': token})
+        return user
+
+
+def add_token(documents):
+    for document in documents:
+        payload = {'username': document['username']}
+        document["token"] = jwt.encode(payload, 'secret')
+        try:
+            payload = jwt.decode(document["token"],'secret')
+            print(payload)
+        except jwt.InvalidTokenError:
+            print("We failed!")
+
 # app = Eve(auth=JWTAuth)  # Re-enable when auth is implemented correctly
-app = Eve()
+app = Eve(auth=RolesAuth)
+app.on_insert_users += add_token
 
 
 @app.route("/login/reddit")
