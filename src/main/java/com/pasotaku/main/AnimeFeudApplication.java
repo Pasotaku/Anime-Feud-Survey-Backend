@@ -8,6 +8,7 @@ import com.example.helloworld.resources.HelloWorldResource;
 import com.example.helloworld.health.TemplateHealthCheck;
 
 public class AnimeFeudApplication extends Application<HelloWorldConfiguration> {
+
     public static void main(String[] args) throws Exception {
         new AnimeFeudApplication().run(args);
     }
