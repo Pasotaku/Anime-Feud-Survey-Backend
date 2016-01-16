@@ -3,7 +3,7 @@ package com.example.helloworld.resources;
 import com.example.helloworld.core.Saying;
 import com.google.common.base.Optional;
 import com.codahale.metrics.annotation.Timed;
-import com.pasotaku.jwt.JWT;
+import com.pasotaku.jwt.AuthToken;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,7 +19,7 @@ public class HelloWorldResource {
     private final String template;
     private final String defaultName;
     private final AtomicLong counter;
-    private final JWT jwt = new JWT("secretkey");
+    private final AuthToken jwt = new AuthToken();
 
     public HelloWorldResource(String template, String defaultName) {
         this.template = template;
@@ -30,17 +30,22 @@ public class HelloWorldResource {
     @GET
     @Timed
     @Path("/getJWT")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getJWTToken(@QueryParam("jwt") String jwt) {
-        return Response.status(Response.Status.OK).entity(this.jwt.createJWT(jwt)).build();
+        String encoded = this.jwt.createJwt(jwt);
+        if(encoded == null) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+        return Response.status(Response.Status.OK).entity(encoded).build();
     }
 
     @GET
     @Timed
     @Path("/getValidJWT")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getValidJWTToken(@QueryParam("jwt") String jwt) {
-        String decoded = this.jwt.decodeJWT(jwt);
+        String decoded = this.jwt.decodeJwt(jwt);
+        System.out.println(jwt);
         if(decoded == null) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }

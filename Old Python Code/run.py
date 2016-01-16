@@ -9,7 +9,7 @@ from flask import request, redirect
 import oauth
 import settings_db_init
 
-import jwt
+import authToken
 
 
 settings_db_init.init()  # Create settings database if it doesn't exist
@@ -36,11 +36,11 @@ class RolesAuth(TokenAuth):
 def add_token(documents):
     for document in documents:
         payload = {'username': document['username']}
-        document["token"] = jwt.encode(payload, 'secret')
+        document["token"] = authToken.encode(payload, 'secret')
         try:
-            payload = jwt.decode(document["token"],'secret')
+            payload = authToken.decode(document["token"],'secret')
             print(payload)
-        except jwt.InvalidTokenError:
+        except authToken.InvalidTokenError:
             print("We failed!")
 
 # app = Eve(auth=JWTAuth)  # Re-enable when auth is implemented correctly
