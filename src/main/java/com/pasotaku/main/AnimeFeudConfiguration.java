@@ -1,10 +1,10 @@
 package com.pasotaku.main;
 
-import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class HelloWorldConfiguration extends Configuration {
+public class AnimeFeudConfiguration extends Configuration {
     @NotEmpty
     private String template;
 

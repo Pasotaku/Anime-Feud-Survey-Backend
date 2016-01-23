@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.Date;
 
-import static com.nimbusds.jwt.JWTClaimsSet.*;
+import static com.nimbusds.jwt.JWTClaimsSet.Builder;
 
 /**
  * Created by johnlight on 12/5/15.
