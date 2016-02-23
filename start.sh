@@ -1,0 +1,1 @@
+mvn clean package; java -jar target/Anime-Feud-Survey-1.0-SNAPSHOT.jar server Anime-Feud-Survey.yml
